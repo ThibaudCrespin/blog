@@ -1,2 +1,31 @@
-# blog
-Projet de blog avec un back-end PHP
+# Blog
+
+## ECV Digital - M1 Développement Web
+
+### Projet d'évaluation en développement
+
+> **Technologies :**
+> - Base de données MySQL.
+> - Back-end et API Rest PHP.
+> - Front-end Angular.
+
+### Consignes pour builder le projet
+
+> **API :**
+> - Importer la base de données mysql depuis le fichier blog.mysql
+> - Copier le fichier config.php.dist en config.php
+> - Remplacer les variables par les valeurs qui conviennent
+
+> **Front :**
+> - Copier le fichier src/app/_config/config.ts.dist en src/app/_config/config.ts
+> - Remplacer les variables par les valeurs qui conviennent
+> - Dans le dossier front, lancer la commande :
+
+```
+ng serve
+```
+> - Dans un navigateur, se rendre sur la page :
+
+```
+localhost:4200
+```

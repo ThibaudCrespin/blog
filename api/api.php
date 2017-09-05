@@ -34,15 +34,16 @@
  	*/
 	
 	require_once("Rest.inc.php");
-	
+	include_once ("config.php");
+
 	class API extends REST {
 	
 		public $data = "";
 		
-		const DB_SERVER = "localhost";
-		const DB_USER = "root";
-		const DB_PASSWORD = "root";
-		const DB = "blog";
+		const DB_SERVER = parameters["database_host"];
+		const DB_USER = parameters["database_user"];
+		const DB_PASSWORD = parameters["database_password"];
+		const DB = parameters["database_name"];
 		
 		private $db = NULL;
 	

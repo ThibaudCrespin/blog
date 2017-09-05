@@ -1,0 +1,9 @@
+<?php
+    const parameters = array(
+        "database_host" => "db_host",
+        "database_port" => db_port,
+        "database_name" => "db_name",
+        "database_user" => "db_user",
+        "database_password" => "db_pass"
+    );
+?>
