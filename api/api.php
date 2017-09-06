@@ -12,7 +12,7 @@
 		usage :
 		
 		    $object->response(output_data, status_code);
-			$object->_request	- to get santinized input 	
+			$object->_request	- to get sanitized input
 			
 			output_data : JSON (I am using)
 			status_code : Send status message for headers
@@ -35,9 +35,6 @@
 	
 	require_once("Rest.inc.php");
 	include_once ("config.php");
-
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Method: POST, GET, OPTIONS');
 
 	class API extends REST {
 	
@@ -88,31 +85,22 @@
         private function add_article(){
             // Cross validation if the request method is POST else it will return "Not Acceptable" status
             if($this->get_request_method() != ("POST" || "OPTIONS")){
-                $this->response('Va te faire',406);
+                $this->response('',406);
             }
 
             $article = json_decode(file_get_contents('php://input'));
 
-            $request = "INSERT INTO article SET title=:title, header=:header, author=:author, content=:content, picture=:picture";
+            $request = "INSERT INTO article (title, header, author, content, picture) 
+                        VALUES ('".addslashes($article->title)."','".addslashes($article->header)."',
+                        '".addslashes($article->author)."','".addslashes($article->content)."','".$article->picture."')";
 
-            // $sql = mysqli_query($this->db, $request);
-            $sql = mysqli_prepare($this->db, $request);
-            $sql->bind_param(":title", $article->title);
-            $sql->bind_param(":header", $article->header);
-            $sql->bind_param(":author", $article->author);
-            $sql->bind_param(":content", $article->content);
-            $sql->bind_param(":picture", $article->picture);
-
-            if($sql->execute()){
-                $result = array();
-                while($rlt = mysqli_fetch_array($sql,MYSQLI_ASSOC)){
-                    $result[] = $rlt;
-                }
+            if(mysqli_query($this->db, $request)){
                 // If success everything is good send header as "OK" and return list of users in JSON format
                 $success = array('status' => "Success", "content" => "Article créé avec succès.");
                 $this->response($this->json($success), 201);
             }
-            $this->response('',400);
+            $error = array('status' => "Error", "content" => "La création de l'article a échoué.");
+            $this->response($this->json($error),400);
         }
 
         /*
@@ -194,15 +182,11 @@
 
         private function add_comment(){
             // Cross validation if the request method is POST else it will return "Not Acceptable" status
-            /*if($this->get_request_method() != ("POST" || "OPTIONS")){
+            if($this->get_request_method() != ("POST" || "OPTIONS")){
                 $this->response('',406);
-            }*/
+            }
 
             $comment = json_decode(file_get_contents('php://input'));
-            $date = date('d/m/Y h:i:s a', time());
-
-            /*$error = array('status' => "Error", "content" => "La création du commentaire a échoué.");
-            $this->response(file_get_contents('php://input'),400);*/
 
             $request = "INSERT INTO comment (article_id, author, content) VALUES (".$comment->article_id.",'".addslashes($comment->author)."','".addslashes($comment->content)."')";
 
@@ -211,7 +195,8 @@
                 $success = array('status' => "Success", "content" => "Commentaire créé avec succès.");
                 $this->response($this->json($success), 201);
             }
-            $this->response('',400);
+            $error = array('status' => "Error", "content" => "La création du commentaire a échoué.");
+            $this->response($this->json($error),400);
         }
 
         /*
