@@ -1,3 +1,39 @@
-<p>
-  comments works!
-</p>
+<md-card class="article">
+    <img md-card-image src="{{ article?.picture }}">
+    <md-card-content>
+        <md-card-title>{{ article?.title }}</md-card-title>
+        <md-card-subtitle>{{ article?.header }}</md-card-subtitle>
+        <p>{{ article?.content }}</p>
+        <p>{{ article?.author }}, le {{ article?.creation_date | date:'d MMMM y' }}</p>
+    </md-card-content>
+</md-card>
+
+<md-tab-group style="z-index: auto">
+    <md-tab label="Commentaires">
+        <div class="comments">
+            <app-comment [comment]="comment" (onDelete)="deleteComment($event)" *ngFor="let comment of comments"></app-comment>
+        </div>
+    </md-tab>
+</md-tab-group>
+
+<ngx-smart-modal #modalComment [identifier]="'comment-modal'" [customClass]="'modal-comment'" [closable]="true">
+    <form class="create" novalidate [formGroup]="form" (submit)="onSubmit(form)">
+        <md-form-field>
+            <input mdInput placeholder="Auteur" formControlName="author" value="">
+        </md-form-field>
+        <md-form-field>
+            <input mdInput placeholder="Commentaire" formControlName="content" maxlength="250" value="">
+        </md-form-field>
+        <input hidden type="number" formControlName="article_id">
+        <button md-raised-button type="button" (click)="modalComment.close()">Annuler</button>
+        <button md-raised-button type="submit" color="primary">Commenter</button>
+    </form>
+</ngx-smart-modal>
+
+<button class="comment-button" md-fab color="primary" (click)="modalComment.open() && buildForm()" >
+    <md-icon class="md-24" aria-label="Commenter l'article">mode_comment</md-icon>
+</button>
+
+<button class="return-button" md-fab color="primary" [routerLink]="['/home']">
+    <md-icon class="md-34" aria-label="Retour">navigate_before</md-icon>
+</button>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Comment } from '../../../_models';
 
 @Component({
   selector: 'app-comment',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
+  @Input() comment: Comment;
+  @Output() onDelete: EventEmitter<number>;
 
-  constructor() { }
+  constructor() {
+    const me = this;
+    me.onDelete = new EventEmitter();
+  }
 
   ngOnInit() {
+  }
+
+  deleteComment() {
+    const me = this;
+    me.onDelete.emit(me.comment.id);
   }
 
 }

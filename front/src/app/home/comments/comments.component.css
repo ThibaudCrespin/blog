@@ -1,0 +1,49 @@
+.article{
+  margin: 0 0 20px 0;
+}
+
+.article img{
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media only screen and (max-width: 740px) {
+  .comment-button{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    z-index: 1;
+  }
+
+  .return-button{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    z-index: 1;
+  }
+}
+
+@media only screen and (min-width: 740px) {
+  .comment-button{
+    position:fixed;
+    bottom:40px;
+    right:40px;
+    z-index: 1;
+  }
+
+  .return-button{
+    position:fixed;
+    bottom:40px;
+    left:40px;
+    z-index: 1;
+  }
+}
+
+.comment-button md-icon {
+  direction: rtl;
+}
+
+.return-button md-icon {
+  direction: rtl;
+}

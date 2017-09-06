@@ -1,3 +1,12 @@
-<p>
-  comment works!
-</p>
+<md-card class="comment">
+    <md-card-header>
+        <md-card-title>{{ comment.author }}</md-card-title>
+        <md-card-subtitle>{{ comment.creation_date | date:'d MMMM y à j mm' }}</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+        <p>{{ comment.content }}</p>
+    </md-card-content>
+    <md-card-actions>
+        <a md-raised-button color="primary" (click)="deleteComment(comment.id)">Supprimer<md-icon>delete</md-icon></a>
+    </md-card-actions>
+</md-card>

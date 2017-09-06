@@ -1,3 +1,13 @@
-<p>
-  article works!
-</p>
+<md-card class="article">
+    <md-card-header>
+        <md-card-title>{{ article.title }}</md-card-title>
+        <md-card-subtitle>{{ article.header }}</md-card-subtitle>
+    </md-card-header>
+    <img md-card-image src="{{ article.picture }}">
+    <md-card-content>
+        <p>{{ article.content }}</p>
+    </md-card-content>
+    <md-card-actions>
+        <a md-raised-button color="primary" [routerLink]="['/home', 'comments', article.id]">Voir plus</a>
+    </md-card-actions>
+</md-card>

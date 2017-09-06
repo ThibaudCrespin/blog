@@ -1,3 +1,8 @@
-<p>
-  articles works!
-</p>
+<div class="articles">
+    <app-article [article]="article" *ngFor="let article of articles"></app-article>
+    <app-article [article]="article" *ngFor="let article of articles"></app-article>
+</div>
+
+<button class="add-button" md-fab color="primary" [routerLink]="['/home', 'create']">
+    <md-icon class="md-24" aria-label="Ecrire un article">mode_edit</md-icon>
+</button>

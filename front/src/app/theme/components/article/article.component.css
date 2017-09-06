@@ -1,0 +1,57 @@
+@media only screen and (max-width: 740px) {
+  .article {
+    margin: 10px 0;
+  }
+
+  md-card-content {
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  img {
+    min-height: 50px;
+  }
+}
+
+@media only screen and (min-width: 740px) {
+  .article {
+    margin: 20px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .article {
+    margin: 30px;
+    width: 400px;
+    height: 570px;
+  }
+
+  md-card-content {
+    height: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  img {
+    min-height: 150px;
+  }
+}
+
+@media only screen and (min-width: 1166px) {
+  .article {
+    margin: 30px;
+    width: 300px;
+    height: 500px;
+  }
+
+  md-card-content {
+    height: 95px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  img {
+    min-height: 250px;
+  }
+}
