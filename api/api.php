@@ -36,6 +36,9 @@
 	require_once("Rest.inc.php");
 	include_once ("config.php");
 
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Method: POST, GET, OPTIONS');
+
 	class API extends REST {
 	
 		public $data = "";
@@ -50,6 +53,7 @@
 		public function __construct(){
 			parent::__construct();// Init parent constructor
 			$this->dbConnect();// Initiate Database connection
+            date_default_timezone_set('France/Paris');
 		}
 		
 		/*
@@ -83,16 +87,23 @@
 
         private function add_article(){
             // Cross validation if the request method is POST else it will return "Not Acceptable" status
-            if($this->get_request_method() != "POST"){
-                $this->response('',406);
+            if($this->get_request_method() != ("POST" || "OPTIONS")){
+                $this->response('Va te faire',406);
             }
 
-            $requestBody = file_get_contents('php://input');
-            $article = json_decode($requestBody);
+            $article = json_decode(file_get_contents('php://input'));
 
-            $request = "INSERT INTO article SET $article";
-            $sql = mysqli_query($this->db, $request);
-            if(mysqli_num_rows($sql) > 0){
+            $request = "INSERT INTO article SET title=:title, header=:header, author=:author, content=:content, picture=:picture";
+
+            // $sql = mysqli_query($this->db, $request);
+            $sql = mysqli_prepare($this->db, $request);
+            $sql->bind_param(":title", $article->title);
+            $sql->bind_param(":header", $article->header);
+            $sql->bind_param(":author", $article->author);
+            $sql->bind_param(":content", $article->content);
+            $sql->bind_param(":picture", $article->picture);
+
+            if($sql->execute()){
                 $result = array();
                 while($rlt = mysqli_fetch_array($sql,MYSQLI_ASSOC)){
                     $result[] = $rlt;
@@ -111,7 +122,7 @@
 
         private function delete_article(){
             // Cross validation if the request method is DELETE else it will return "Not Acceptable" status
-            if($this->get_request_method() != "DELETE"){
+            if($this->get_request_method() != "GET"){
                 $this->response('',406);
             }
             $id = (int)$this->_request['id'];
@@ -177,13 +188,40 @@
         }
 
         /*
+         *	CREATE Comment
+         *  comment : <COMMENT OBJECT>
+         */
+
+        private function add_comment(){
+            // Cross validation if the request method is POST else it will return "Not Acceptable" status
+            /*if($this->get_request_method() != ("POST" || "OPTIONS")){
+                $this->response('',406);
+            }*/
+
+            $comment = json_decode(file_get_contents('php://input'));
+            $date = date('d/m/Y h:i:s a', time());
+
+            /*$error = array('status' => "Error", "content" => "La création du commentaire a échoué.");
+            $this->response(file_get_contents('php://input'),400);*/
+
+            $request = "INSERT INTO comment (article_id, author, content) VALUES (".$comment->article_id.",'".addslashes($comment->author)."','".addslashes($comment->content)."')";
+
+            if(mysqli_query($this->db, $request)){
+                // If success everything is good send header as "OK" and return list of users in JSON format
+                $success = array('status' => "Success", "content" => "Commentaire créé avec succès.");
+                $this->response($this->json($success), 201);
+            }
+            $this->response('',400);
+        }
+
+        /*
          *	DELETE Comment
          *  id : <COMMENT ID>
          */
 
         private function delete_comment(){
             // Cross validation if the request method is DELETE else it will return "Not Acceptable" status
-            if($this->get_request_method() != "DELETE"){
+            if($this->get_request_method() != "GET"){
                 $this->response('',406);
             }
             $id = (int)$this->_request['id'];

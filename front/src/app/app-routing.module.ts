@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { CommentsComponent } from './home/comments/comments.component';
+import { CreateComponent} from './home/create/create.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {path: 'articles', component: ArticlesComponent},
-      {path: 'comments', component: CommentsComponent},
+      {path: 'comments/:article', component: CommentsComponent},
+      {path: 'create', component: CreateComponent},
       {path: '**', redirectTo: 'articles', pathMatch: 'full'}
     ]
   }
