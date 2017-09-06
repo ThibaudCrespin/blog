@@ -1,24 +1,25 @@
-<form class="create">
+<form class="create" novalidate [formGroup]="form" (submit)="onSubmit(form)">
     <md-form-field>
         <md-icon mdSuffix>mode_edit</md-icon>
-        <input mdInput placeholder="Titre" value="">
+        <input mdInput placeholder="Titre" formControlName="title" value="">
     </md-form-field>
     <md-form-field>
         <md-icon mdSuffix>mode_edit</md-icon>
-        <input mdInput placeholder="En-tête" value="">
+        <input mdInput placeholder="En-tête" formControlName="header" value="">
     </md-form-field>
     <md-form-field>
         <md-icon mdSuffix>person</md-icon>
-        <input mdInput placeholder="Auteur" value="">
+        <input mdInput placeholder="Auteur" formControlName="author" value="">
     </md-form-field>
     <md-form-field>
         <md-icon mdSuffix>message</md-icon>
-        <input mdInput placeholder="Contenu de l'article" value="">
+        <textarea mdInput placeholder="Contenu de l'article" formControlName="content" rows="10" value=""></textarea>
     </md-form-field>
     <md-form-field>
         <md-icon mdSuffix>photo</md-icon>
-        <input mdInput type="url" placeholder="Image" value="">
+        <input mdInput type="url" placeholder="Image" formControlName="picture" value="">
     </md-form-field>
+    <button class="form-button" md-raised-button [disabled]="form.invalid" type="submit" color="primary">Publier</button>
 </form>
 
 <button class="return-button" md-fab color="primary" [routerLink]="['/home']">

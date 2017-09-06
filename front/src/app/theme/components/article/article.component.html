@@ -8,6 +8,6 @@
         <p>{{ article.content }}</p>
     </md-card-content>
     <md-card-actions>
-        <a md-raised-button color="primary" [routerLink]="['/home', 'comments', article.id]">Voir plus</a>
+        <button class="more-button" md-raised-button color="primary" [routerLink]="['/home', 'comments', article.id]">Voir plus</button>
     </md-card-actions>
 </md-card>

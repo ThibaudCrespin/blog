@@ -22,6 +22,10 @@
     left:20px;
     z-index: 1;
   }
+
+  .form-button {
+    width: 100%;
+  }
 }
 
 @media only screen and (min-width: 740px) {
@@ -38,6 +42,11 @@
     left:40px;
     z-index: 1;
   }
+
+  .form-button {
+    width: 45%;
+    margin: 0 5px;
+  }
 }
 
 .comment-button md-icon {
@@ -46,4 +55,13 @@
 
 .return-button md-icon {
   direction: rtl;
+}
+
+md-form-field {
+  width: 100%;
+}
+
+.button-group {
+  margin-top: 15px;
+  text-align: center;
 }

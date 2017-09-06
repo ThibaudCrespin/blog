@@ -19,3 +19,15 @@
 .return-button md-icon {
   direction: rtl;
 }
+
+md-form-field {
+  width: 100%;
+}
+
+.form-button {
+  width: 100%;
+}
+
+.create {
+  margin-top: 80px;
+}

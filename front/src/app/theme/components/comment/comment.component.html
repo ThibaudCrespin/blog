@@ -7,6 +7,6 @@
         <p>{{ comment.content }}</p>
     </md-card-content>
     <md-card-actions>
-        <a md-raised-button color="primary" (click)="deleteComment(comment.id)">Supprimer<md-icon>delete</md-icon></a>
+        <button class="delete-button" md-raised-button color="primary" (click)="deleteComment(comment.id)">Supprimer<md-icon>delete</md-icon></button>
     </md-card-actions>
 </md-card>

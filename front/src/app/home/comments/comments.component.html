@@ -8,7 +8,7 @@
     </md-card-content>
 </md-card>
 
-<md-tab-group style="z-index: auto">
+<md-tab-group>
     <md-tab label="Commentaires">
         <div class="comments">
             <app-comment [comment]="comment" (onDelete)="deleteComment($event)" *ngFor="let comment of comments"></app-comment>
@@ -22,11 +22,13 @@
             <input mdInput placeholder="Auteur" formControlName="author" value="">
         </md-form-field>
         <md-form-field>
-            <input mdInput placeholder="Commentaire" formControlName="content" maxlength="250" value="">
+            <textarea mdInput placeholder="Commentaire" formControlName="content" maxlength="250" rows="4" value=""></textarea>
         </md-form-field>
         <input hidden type="number" formControlName="article_id">
-        <button md-raised-button type="button" (click)="modalComment.close()">Annuler</button>
-        <button md-raised-button type="submit" color="primary">Commenter</button>
+        <div class="button-group">
+            <button class="form-button" md-raised-button type="button" (click)="modalComment.close()">Annuler</button>
+            <button class="form-button" md-raised-button [disabled]="form.invalid" type="submit" color="primary">Commenter</button>
+        </div>
     </form>
 </ngx-smart-modal>
 

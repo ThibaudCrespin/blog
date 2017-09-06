@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Response } from '@angular/http';
+import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Config } from '../_config/config';
 import 'rxjs/add/operator/map';
@@ -17,7 +17,11 @@ export class CommentsService {
   }
 
   create(comment: any): Observable<Object> {
-    return this.http.post(Config.apiUrl + 'add_comment', comment)
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions();
+    options.headers = headers;
+    return this.http.post(Config.apiUrl + 'add_comment', comment, options)
       .map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json()));
   }

@@ -1,3 +1,9 @@
 .comment {
   margin: 20px 0;
 }
+
+@media only screen and (max-width: 500px) {
+  .delete-button{
+    width: 100%;
+  }
+}

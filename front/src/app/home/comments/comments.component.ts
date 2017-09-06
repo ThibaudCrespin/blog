@@ -4,6 +4,7 @@ import { ArticlesService, CommentsService } from '../../_services';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-comments',
@@ -18,7 +19,8 @@ export class CommentsComponent implements OnInit {
   articleId: number = 0;
 
   constructor(public route: ActivatedRoute, private fb: FormBuilder, private snackbar: MdSnackBar,
-              private articlesService: ArticlesService, private commentsService: CommentsService) {
+              private articlesService: ArticlesService, private commentsService: CommentsService,
+              private ngxSmartModalService: NgxSmartModalService) {
   }
 
   ngOnInit() {
@@ -82,6 +84,7 @@ export class CommentsComponent implements OnInit {
       .subscribe(
         response => {
           me.getComments();
+          me.ngxSmartModalService.getModal('comment-modal').close();
           me.snackbar.open(response['content'], 'Fermer', {
             duration: 3000
           });
