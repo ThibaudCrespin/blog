@@ -1,14 +1,14 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { AppRoutingModule } from '../app-routing.module';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { MdToolbarModule, MdCardModule, MdButtonModule, MdIconModule } from '@angular/material';
 
 import {
   HeaderComponent,
   ArticleComponent,
   CommentComponent
 } from './components';
-
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 
 const THEME_COMPONENTS = [
   HeaderComponent,
@@ -22,14 +22,16 @@ const THEME_SERVICES = [
 
 @NgModule({
   declarations: [
-    THEME_COMPONENTS,
-    ArticleComponent,
-    CommentComponent
+    THEME_COMPONENTS
   ],
   imports: [
     CommonModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MdToolbarModule,
+    MdCardModule,
+    MdButtonModule,
+    MdIconModule
   ],
   exports: [
     THEME_COMPONENTS

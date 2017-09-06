@@ -1,0 +1,21 @@
+@media only screen and (max-width: 740px) {
+  .return-button{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    z-index: 1;
+  }
+}
+
+@media only screen and (min-width: 740px) {
+  .return-button{
+    position:fixed;
+    bottom:40px;
+    left:40px;
+    z-index: 1;
+  }
+}
+
+.return-button md-icon {
+  direction: rtl;
+}

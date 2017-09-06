@@ -1,0 +1,26 @@
+<form class="create">
+    <md-form-field>
+        <md-icon mdSuffix>mode_edit</md-icon>
+        <input mdInput placeholder="Titre" value="">
+    </md-form-field>
+    <md-form-field>
+        <md-icon mdSuffix>mode_edit</md-icon>
+        <input mdInput placeholder="En-tête" value="">
+    </md-form-field>
+    <md-form-field>
+        <md-icon mdSuffix>person</md-icon>
+        <input mdInput placeholder="Auteur" value="">
+    </md-form-field>
+    <md-form-field>
+        <md-icon mdSuffix>message</md-icon>
+        <input mdInput placeholder="Contenu de l'article" value="">
+    </md-form-field>
+    <md-form-field>
+        <md-icon mdSuffix>photo</md-icon>
+        <input mdInput type="url" placeholder="Image" value="">
+    </md-form-field>
+</form>
+
+<button class="return-button" md-fab color="primary" [routerLink]="['/home']">
+    <md-icon class="md-34" aria-label="Retour">navigate_before</md-icon>
+</button>
